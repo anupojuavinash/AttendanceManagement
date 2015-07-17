@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html5>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/main.css")
+   
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+     @Styles.Render("~/Content/jquery-ui.css")
+    <script src="~/Scripts/jquery-ui.js"></script>
+    <script src="~/Scripts/main.js"></script>
+</head>
+<body>
+   
+    <header>
+			<h1> Attendance Management System </h1>
+			<div id = "user_info">
+                @if (Session["LogedUserFullname"] != null)
+                {
+				    <p>Welcome <span>user</span></p>
+				    <input type ="button" value="Logout"/> 
+                }    
+			</div>
+		</header>
+		
+        <div id ="main_content">
+            @RenderBody()
+        </div>
+        @RenderSection("scripts", required: false)
+  
+</body>
+</html>

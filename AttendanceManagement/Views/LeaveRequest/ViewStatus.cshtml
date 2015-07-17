@@ -1,0 +1,64 @@
+﻿@model IEnumerable<AttendanceManagement.Models.LeaveRequest>
+
+@{
+    ViewBag.Title = "ViewStatus";
+    Layout = "~/Views/Employee/Employee.cshtml";
+}
+
+<h2>ViewStatus</h2>
+
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfApplication)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeOfLeave)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reason)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.DateOfApplication.ToShortDateString()
+        </td>
+        <td>
+            @item.FromDate.ToShortDateString()
+        </td>
+        <td>
+            @item.ToDate.ToShortDateString()
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeOfLeave)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reason)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        
+    </tr>
+}
+
+</table>

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AMSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="AMSModelStoreContainer">
+    <EntitySet Name="Attendance" EntityType="AMSModel.Store.Attendance" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employee" EntityType="AMSModel.Store.Employee" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EmployeeTask" EntityType="AMSModel.Store.EmployeeTask" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Holiday" EntityType="AMSModel.Store.Holiday" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Leave" EntityType="AMSModel.Store.Leave" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Attendance_Employee" Association="AMSModel.Store.FK_Attendance_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Attendance" EntitySet="Attendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmployeeTask_Employee" Association="AMSModel.Store.FK_EmployeeTask_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="EmployeeTask" EntitySet="EmployeeTask" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Leaves_Employee" Association="AMSModel.Store.FK_Leaves_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Leave" EntitySet="Leave" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Manager_Employee" Association="AMSModel.Store.FK_Manager_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="Employee1" EntitySet="Employee" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Attendance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Designation" Type="nvarchar" MaxLength="50" />
+    <Property Name="Gender" Type="nchar" MaxLength="10" />
+    <Property Name="ManagerId" Type="int" />
+  </EntityType>
+  <EntityType Name="EmployeeTask">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="StartTime" Type="time" Nullable="false" />
+    <Property Name="EndTime" Type="time" Nullable="false" />
+    <Property Name="TasksDone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Holiday">
+    <Key>
+      <PropertyRef Name="HolidayId" />
+    </Key>
+    <Property Name="HolidayId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Leave">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="int" Nullable="false" />
+    <Property Name="CasualLeaves" Type="int" Nullable="false" />
+    <Property Name="SickLeaves" Type="int" Nullable="false" />
+    <Property Name="MaternalLeaves" Type="int" Nullable="false" />
+    <Property Name="OptionalHolidays" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Attendance_Employee">
+    <End Role="Employee" Type="AMSModel.Store.Employee" Multiplicity="1" />
+    <End Role="Attendance" Type="AMSModel.Store.Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Attendance">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmployeeTask_Employee">
+    <End Role="Employee" Type="AMSModel.Store.Employee" Multiplicity="1" />
+    <End Role="EmployeeTask" Type="AMSModel.Store.EmployeeTask" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="EmployeeTask">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Leaves_Employee">
+    <End Role="Employee" Type="AMSModel.Store.Employee" Multiplicity="1" />
+    <End Role="Leave" Type="AMSModel.Store.Leave" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Leave">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Manager_Employee">
+    <End Role="Employee" Type="AMSModel.Store.Employee" Multiplicity="0..1" />
+    <End Role="Employee1" Type="AMSModel.Store.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Employee1">
+        <PropertyRef Name="ManagerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,61 @@
+﻿@model AttendanceManagement.Models.Leave
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Leave</legend>
+
+        @Html.HiddenFor(model => model.EmployeeId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CasualLeaves)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CasualLeaves)
+            @Html.ValidationMessageFor(model => model.CasualLeaves)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SickLeaves)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SickLeaves)
+            @Html.ValidationMessageFor(model => model.SickLeaves)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MaternalLeaves)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MaternalLeaves)
+            @Html.ValidationMessageFor(model => model.MaternalLeaves)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OptionalHolidays)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OptionalHolidays)
+            @Html.ValidationMessageFor(model => model.OptionalHolidays)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

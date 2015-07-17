@@ -1,0 +1,75 @@
+﻿@model AttendanceManagement.Models.EmployeeTask
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>EmployeeTask</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Date)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Date)
+            @Html.ValidationMessageFor(model => model.Date)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StartTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StartTime)
+            @Html.ValidationMessageFor(model => model.StartTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EndTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EndTime)
+            @Html.ValidationMessageFor(model => model.EndTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TasksDone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TasksDone)
+            @Html.ValidationMessageFor(model => model.TasksDone)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EmployeeId, "Employee")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("EmployeeId", String.Empty)
+            @Html.ValidationMessageFor(model => model.EmployeeId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Status)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

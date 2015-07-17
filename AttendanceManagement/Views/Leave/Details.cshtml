@@ -1,0 +1,40 @@
+﻿@model AttendanceManagement.Models.Leave
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Employee/Employee.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Leave</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CasualLeaves)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CasualLeaves)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SickLeaves)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SickLeaves)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MaternalLeaves)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MaternalLeaves)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OptionalHolidays)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OptionalHolidays)
+    </div>
+</fieldset>

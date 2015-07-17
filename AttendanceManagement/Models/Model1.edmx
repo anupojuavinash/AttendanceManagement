@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AMSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="AMSModelStoreContainer">
+          <EntitySet Name="Attendance" EntityType="AMSModel.Store.Attendance" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Employee" EntityType="AMSModel.Store.Employee" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EmployeeTask" EntityType="AMSModel.Store.EmployeeTask" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Holiday" EntityType="AMSModel.Store.Holiday" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Leave" EntityType="AMSModel.Store.Leave" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LeaveRequest" EntityType="AMSModel.Store.LeaveRequest" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Attendance_Employee" Association="AMSModel.Store.FK_Attendance_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeTask_Employee" Association="AMSModel.Store.FK_EmployeeTask_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeeTask" EntitySet="EmployeeTask" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LeaveRequest_Employee" Association="AMSModel.Store.FK_LeaveRequest_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="LeaveRequest" EntitySet="LeaveRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Leaves_Employee" Association="AMSModel.Store.FK_Leaves_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Leave" EntitySet="Leave" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manager_Employee" Association="AMSModel.Store.FK_Manager_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Employee1" EntitySet="Employee" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Designation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="nchar" MaxLength="10" />
+          <Property Name="ManagerId" Type="int" />
+        </EntityType>
+        <EntityType Name="EmployeeTask">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="StartTime" Type="time" Nullable="false" />
+          <Property Name="EndTime" Type="time" Nullable="false" />
+          <Property Name="TasksDone" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Holiday">
+          <Key>
+            <PropertyRef Name="HolidayId" />
+          </Key>
+          <Property Name="HolidayId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Leave">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="CasualLeaves" Type="int" Nullable="false" />
+          <Property Name="SickLeaves" Type="int" Nullable="false" />
+          <Property Name="MaternalLeaves" Type="int" Nullable="false" />
+          <Property Name="OptionalHolidays" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LeaveRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DateOfApplication" Type="date" Nullable="false" />
+          <Property Name="FromDate" Type="date" Nullable="false" />
+          <Property Name="ToDate" Type="date" Nullable="false" />
+          <Property Name="TypeOfLeave" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Reason" Type="varchar(max)" Nullable="false" />
+          <Property Name="Employee_Id" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Attendance_Employee">
+          <End Role="Employee" Type="AMSModel.Store.Employee" Multiplicity="1" />
+          <End Role="Attendance" Type="AMSModel.Store.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeTask_Employee">
+          <End Role="Employee" Type="AMSModel.Store.Employee" Multiplicity="1" />
+          <End Role="EmployeeTask" Type="AMSModel.Store.EmployeeTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeTask">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LeaveRequest_Employee">
+          <End Role="Employee" Type="AMSModel.Store.Employee" Multiplicity="1" />
+          <End Role="LeaveRequest" Type="AMSModel.Store.LeaveRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="LeaveRequest">
+              <PropertyRef Name="Employee_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Leaves_Employee">
+          <End Role="Employee" Type="AMSModel.Store.Employee" Multiplicity="1" />
+          <End Role="Leave" Type="AMSModel.Store.Leave" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Leave">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manager_Employee">
+          <End Role="Employee" Type="AMSModel.Store.Employee" Multiplicity="0..1" />
+          <End Role="Employee1" Type="AMSModel.Store.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AMSModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AMSEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Attendances" EntityType="AMSModel.Attendance" />
+          <EntitySet Name="Employees" EntityType="AMSModel.Employee" />
+          <EntitySet Name="EmployeeTasks" EntityType="AMSModel.EmployeeTask" />
+          <EntitySet Name="Holidays" EntityType="AMSModel.Holiday" />
+          <EntitySet Name="Leaves" EntityType="AMSModel.Leave" />
+          <AssociationSet Name="FK_Attendance_Employee" Association="AMSModel.FK_Attendance_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Attendance" EntitySet="Attendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeTask_Employee" Association="AMSModel.FK_EmployeeTask_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="EmployeeTask" EntitySet="EmployeeTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Leaves_Employee" Association="AMSModel.FK_Leaves_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Leave" EntitySet="Leaves" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manager_Employee" Association="AMSModel.FK_Manager_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Employee1" EntitySet="Employees" />
+          </AssociationSet>
+          <EntitySet Name="LeaveRequests" EntityType="AMSModel.LeaveRequest" />
+          <AssociationSet Name="FK_LeaveRequest_Employee" Association="AMSModel.FK_LeaveRequest_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="LeaveRequest" EntitySet="LeaveRequests" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Employee" Relationship="AMSModel.FK_Attendance_Employee" FromRole="Attendance" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Designation" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+          <Property Name="ManagerId" Type="Int32" />
+          <NavigationProperty Name="Attendances" Relationship="AMSModel.FK_Attendance_Employee" FromRole="Employee" ToRole="Attendance" />
+          <NavigationProperty Name="EmployeeTasks" Relationship="AMSModel.FK_EmployeeTask_Employee" FromRole="Employee" ToRole="EmployeeTask" />
+          <NavigationProperty Name="Leave" Relationship="AMSModel.FK_Leaves_Employee" FromRole="Employee" ToRole="Leave" />
+          <NavigationProperty Name="Employee1" Relationship="AMSModel.FK_Manager_Employee" FromRole="Employee" ToRole="Employee1" />
+          <NavigationProperty Name="Employee2" Relationship="AMSModel.FK_Manager_Employee" FromRole="Employee1" ToRole="Employee" />
+          <NavigationProperty Name="LeaveRequests" Relationship="AMSModel.FK_LeaveRequest_Employee" FromRole="Employee" ToRole="LeaveRequest" />
+        </EntityType>
+        <EntityType Name="EmployeeTask">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="TasksDone" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="AMSModel.FK_EmployeeTask_Employee" FromRole="EmployeeTask" ToRole="Employee" />
+          <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Holiday">
+          <Key>
+            <PropertyRef Name="HolidayId" />
+          </Key>
+          <Property Name="HolidayId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Leave">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="CasualLeaves" Type="Int32" Nullable="false" />
+          <Property Name="SickLeaves" Type="Int32" Nullable="false" />
+          <Property Name="MaternalLeaves" Type="Int32" Nullable="false" />
+          <Property Name="OptionalHolidays" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="AMSModel.FK_Leaves_Employee" FromRole="Leave" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK_Attendance_Employee">
+          <End Role="Employee" Type="AMSModel.Employee" Multiplicity="1" />
+          <End Role="Attendance" Type="AMSModel.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeTask_Employee">
+          <End Role="Employee" Type="AMSModel.Employee" Multiplicity="1" />
+          <End Role="EmployeeTask" Type="AMSModel.EmployeeTask" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="EmployeeTask">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Leaves_Employee">
+          <End Role="Employee" Type="AMSModel.Employee" Multiplicity="1" />
+          <End Role="Leave" Type="AMSModel.Leave" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Leave">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manager_Employee">
+          <End Role="Employee" Type="AMSModel.Employee" Multiplicity="0..1" />
+          <End Role="Employee1" Type="AMSModel.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LeaveRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="DateOfApplication" Nullable="false" Precision="0" />
+          <Property Type="DateTime" Name="FromDate" Nullable="false" Precision="0" />
+          <Property Type="DateTime" Name="ToDate" Nullable="false" Precision="0" />
+          <Property Type="String" Name="TypeOfLeave" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Reason" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Employee_Id" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="AMSModel.FK_LeaveRequest_Employee" FromRole="LeaveRequest" ToRole="Employee" />
+          <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_LeaveRequest_Employee">
+          <End Type="AMSModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="AMSModel.LeaveRequest" Role="LeaveRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="LeaveRequest">
+              <PropertyRef Name="Employee_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AMSModelStoreContainer" CdmEntityContainer="AMSEntities">
+          <EntitySetMapping Name="Attendances">
+            <EntityTypeMapping TypeName="AMSModel.Attendance">
+              <MappingFragment StoreEntitySet="Attendance">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="AMSModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeTasks">
+            <EntityTypeMapping TypeName="AMSModel.EmployeeTask">
+              <MappingFragment StoreEntitySet="EmployeeTask">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="TasksDone" ColumnName="TasksDone" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Holidays">
+            <EntityTypeMapping TypeName="AMSModel.Holiday">
+              <MappingFragment StoreEntitySet="Holiday">
+                <ScalarProperty Name="HolidayId" ColumnName="HolidayId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Leaves">
+            <EntityTypeMapping TypeName="AMSModel.Leave">
+              <MappingFragment StoreEntitySet="Leave">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="CasualLeaves" ColumnName="CasualLeaves" />
+                <ScalarProperty Name="SickLeaves" ColumnName="SickLeaves" />
+                <ScalarProperty Name="MaternalLeaves" ColumnName="MaternalLeaves" />
+                <ScalarProperty Name="OptionalHolidays" ColumnName="OptionalHolidays" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveRequests">
+            <EntityTypeMapping TypeName="AMSModel.LeaveRequest">
+              <MappingFragment StoreEntitySet="LeaveRequest">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Employee_Id" ColumnName="Employee_Id" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="TypeOfLeave" ColumnName="TypeOfLeave" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="DateOfApplication" ColumnName="DateOfApplication" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

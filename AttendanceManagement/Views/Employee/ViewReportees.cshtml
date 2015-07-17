@@ -1,0 +1,25 @@
+﻿@model IEnumerable<AttendanceManagement.Models.Employee>
+
+@{
+    ViewBag.Title = "ViewReportees";
+    Layout = "~/Views/Employee/Employee.cshtml";
+    int i = 1;
+}
+
+<h2> Reportees </h2> 
+            
+			<table class="center" id ="reportees" >
+			<tr style="color:black">
+				<th><label for = "sNo" >S.No</label></th>
+                <th><label for = "empId" >Emp.Id</label></th>
+				<th><label for = "eName" >Employee Name</label></th>
+			</tr>
+                @foreach (var item in Model) {
+			<tr>
+				<td>@(i++)</td>
+                <td>@item.EmployeeId</td>
+				<td><a href='@Url.Action("ViewDetails","EmployeeTask", new{ id = Int32.Parse((Session["LogedUserId"]).ToString())})' > @Html.DisplayFor(modelItem => item.Name)</a></td>
+			</tr>
+                }
+			
+			</table>

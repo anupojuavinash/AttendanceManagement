@@ -1,0 +1,47 @@
+﻿@model IEnumerable<AttendanceManagement.Models.Leave>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CasualLeaves)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SickLeaves)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaternalLeaves)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OptionalHolidays)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CasualLeaves)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SickLeaves)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaternalLeaves)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OptionalHolidays)
+        </td>
+        
+    </tr>
+}
+
+</table>

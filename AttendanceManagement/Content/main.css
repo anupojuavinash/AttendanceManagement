@@ -1,0 +1,101 @@
+			header {
+				display : block;
+				margin : 0px;
+				height : 80px;
+				padding : 10px;
+				background-color : #de3163;
+			}
+			#nav_bar {
+				display : inline-block;
+				width : 20%;
+				//height : 500px;
+				float : left;
+				
+			}
+html
+{
+    background : url(pink.jpg);
+}
+			#nav_bar > ul{
+				list-style-type : none;
+				//height : 500px;
+				background-color: #98bf21;
+				
+			}
+			#nav_bar > ul > li {
+				margin : 5px; 
+				padding : 5px; 
+			}
+			a.navLink:link, a.navLink:visited {
+				display: block;
+				font-weight: bold;
+				color: #FFFFFF;
+				background-color: #98bf21;
+				width: 150px;
+				height : auto;
+				text-align: center;
+				padding: 4px;
+				text-decoration: none;
+				text-transform: uppercase;
+			}
+			a.navLink:hover, a.navLink:active {
+				background-color: #7A991A;
+			}
+			#main_content {
+				display : block;
+				position : relative;
+				float : left; 
+				margin : 20px;
+				padding : 10px;
+				width : 75%;
+				//text-align: center;
+				
+			}
+			
+			#user_info {
+				display: inline-block;
+				margin-left: 600px;
+				float:left;
+			}
+			h1{
+				float:left;
+			}
+			#attendance{
+				font-size: 12px;
+			}
+            table.center {
+				margin-left:auto; 
+				margin-right:auto;
+			}
+			table {
+				font-size: 20px;
+				border: 3px solid black;
+			}
+			td,tr{
+				text-align: center;
+			}
+            .InputTable{
+                padding:5px;
+                border:3px solid;
+            }
+            .InputTable > th.otherTableHeaders {
+                border:2px solid;
+                padding:3px;
+                display:none;
+            }
+            .InputTable > th.header {
+                border:2px solid;
+                padding:3px;
+            }
+            .InputTable > tr,td {
+                padding:5px;
+                border:1px solid;
+            }
+            .InputTable > th,tr,td {
+                border-collapse: collapse;
+                text-align:center;
+            }
+            .InputTable > td {
+                width:20%;
+            }
+            

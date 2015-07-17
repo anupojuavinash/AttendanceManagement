@@ -1,0 +1,43 @@
+﻿@model IEnumerable<AttendanceManagement.Models.EmployeeTask>
+@{
+    ViewBag.Title = "ViewDetails";
+    Layout = "~/Views/Employee/Employee.cshtml";
+}
+
+<h2> Employee Daily Report </h2>
+@using (Html.BeginForm("Update","EmployeeTask",FormMethod.Post)) {
+<table style: width="100%",text-align ="center">
+		<tr>
+            <th>Task Id</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Tasks Done</th>
+            <th>Employee Id</th>
+            <th>Approval</th>
+		</tr>
+        @{ int i = 0 ;}
+
+        @foreach (var item in Model) { 
+         <tr>
+            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+            <td>@item.Date.ToShortDateString()</td>
+            <td>@Html.DisplayFor(modelItem => item.StartTime)</td>
+            <td>@Html.DisplayFor(modelItem => item.EndTime)</td>
+            <td>@Html.DisplayFor(modelItem => item.TasksDone)</td>
+            <td>@Html.DisplayFor(modelItem => item.EmployeeId)</td>
+             @if(item.Status.Equals("Submitted")){
+                <td><input type ="radio" name="status@(item.Id)" value ="Yes"/>Yes<input type ="radio" name="status@(item.Id)" value="No" />No</td>
+                i++;
+             }
+             else {
+                <td> @Html.DisplayFor(modelItem => item.Status)</td>
+            }
+            </tr>
+            
+        }
+	</table>
+	if(i>0){
+    <input type="submit" />
+    }
+}

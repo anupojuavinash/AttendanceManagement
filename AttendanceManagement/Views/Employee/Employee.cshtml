@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html5>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+     @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/main.css")
+   
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+     @Styles.Render("~/Content/jquery-ui.css")
+    <script src="~/Scripts/jquery-ui.js"></script>
+    <script src="~/Scripts/main.js"></script>
+</head>
+<body>
+   
+    <header>
+			<h1> Attendance Management System </h1>
+			<div id = "user_info">
+                @if (Session["LogedUserFullname"] != null)
+                {
+				    <p>Welcome <span>@Session["LogedUsername"]</span></p>
+				    <a href="@Url.Action("LogOut", "Home")"> LogOut </a>
+                }    
+			</div>
+        </header>
+        <div id = "nav_bar">
+			<ul>
+				<li onclick=''><a class="navLink" href=''  >View Previous Submissions </a></li>
+				<li onclick=''><a class="navLink" href=''  >Current submissions </a></li>
+				<li onclick=''><a class="navLink" href="@Url.Action("ApplyLeave", "Employee")"  >Apply leave </a></li>
+				<li onclick=''><a class="navLink" href='@Url.Action("Leaves", "Employee")'  >Leaves </a></li>
+                 @if (Session["LogedUserType"].ToString().Equals("Manager"))
+                 {
+				    <li onclick=''><a class="navLink" href='@Url.Action("ViewReportees", "Employee")'  >Reports </a></li>
+                     <li onclick=''><a class="navLink" href='@Url.Action("Index", "LeaveRequest", new{ id = Int32.Parse((Session["LogedUserId"]).ToString())})'  >Requests </a></li>
+                 }
+				<li onclick=''><a class="navLink" href='@Url.Action("ViewStatus", "LeaveRequest", new {id =Int32.Parse(Session["LogedUserId"].ToString()) })'  >Request Status </a></li>
+			</ul>
+		</div>
+        <div id ="main_content">
+            @RenderBody()
+        </div>
+         @RenderSection("scripts", required: false)
+          
+</body>
+</html>
+

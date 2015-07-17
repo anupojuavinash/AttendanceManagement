@@ -1,0 +1,70 @@
+﻿@model IEnumerable<AttendanceManagement.Models.LeaveRequest>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Employee/Employee.cshtml";
+}
+
+<h2>Requested Leaves</h2>
+@using (Html.BeginForm("Update","LeaveRequest",FormMethod.Post,Model)) {
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfApplication)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeOfLeave)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reason)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee_Id)
+        </th>
+        <th></th>
+    </tr>
+    @{int i = 0;}
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.DateOfApplication.ToShortDateString()
+        </td>
+        <td>
+            @item.FromDate.ToShortDateString()
+        </td>
+        <td>
+            @item.ToDate.ToShortDateString()
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeOfLeave)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reason)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_Id)
+        </td>
+        @if(item.Status.Equals("Requested")){
+        <td>
+            <input type ="radio" name="status@(item.Id)" value ="Yes"/>Yes<input type ="radio" name="status@(item.Id)" value="No" />No
+        </td>
+            i++;
+        }
+        else {
+            <td> @Html.DisplayFor(modelItem => item.Status)</td>
+        }
+      </tr>
+    
+}
+
+</table>
+    if(i>0){
+    <input type="submit" />
+    }
+}

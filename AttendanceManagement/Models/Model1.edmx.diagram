@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f9332b167cb4461a882ce0529524ea74" Name="Diagram1">
+        <EntityTypeShape EntityType="AMSModel.Attendance" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AMSModel.Employee" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AMSModel.EmployeeTask" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="AMSModel.Holiday" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AMSModel.Leave" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="AMSModel.FK_Attendance_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="AMSModel.FK_EmployeeTask_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="AMSModel.FK_Leaves_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="AMSModel.FK_Manager_Employee" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="AMSModel.LeaveRequest" Width="1.5" PointX="10.43571284713024" PointY="28.971637187978082" />
+        <AssociationConnector Association="AMSModel.FK_LeaveRequest_Employee" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

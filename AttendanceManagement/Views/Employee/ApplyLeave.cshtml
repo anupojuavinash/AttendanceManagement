@@ -1,0 +1,61 @@
+﻿@model AttendanceManagement.Models.LeaveRequest
+
+@{
+    ViewBag.Title = "ApplyLeave";
+    Layout = "~/Views/Employee/Employee.cshtml";
+}
+
+<h2>ApplyLeave</h2>
+
+@using (Html.BeginForm("AddRequest","Employee",FormMethod.Post)) {
+    @Html.ValidationSummary(true)
+    
+    <fieldset>
+        <legend>LeaveRequest</legend>
+
+        
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FromDate)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.FromDate,new { @class = "date" })
+            
+            
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ToDate)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.ToDate,new { @class = "date" })
+            
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TypeOfLeave)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TypeOfLeave)
+            @Html.ValidationMessageFor(model => model.TypeOfLeave)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Reason)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Reason)
+            @Html.ValidationMessageFor(model => model.Reason)
+        </div>
+        
+        
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

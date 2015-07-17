@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendanceManagement", "AttendanceManagement\AttendanceManagement.csproj", "{F03A2B06-9A59-41E8-9B52-AD85A2A93C78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendanceManagement.Tests", "AttendanceManagement.Tests\AttendanceManagement.Tests.csproj", "{FE4B51C7-BFF7-4246-8BFB-011F940D2074}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F03A2B06-9A59-41E8-9B52-AD85A2A93C78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F03A2B06-9A59-41E8-9B52-AD85A2A93C78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F03A2B06-9A59-41E8-9B52-AD85A2A93C78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F03A2B06-9A59-41E8-9B52-AD85A2A93C78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE4B51C7-BFF7-4246-8BFB-011F940D2074}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE4B51C7-BFF7-4246-8BFB-011F940D2074}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE4B51C7-BFF7-4246-8BFB-011F940D2074}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE4B51C7-BFF7-4246-8BFB-011F940D2074}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

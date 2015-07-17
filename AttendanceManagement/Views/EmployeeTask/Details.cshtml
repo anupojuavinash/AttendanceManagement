@@ -1,0 +1,57 @@
+﻿@model AttendanceManagement.Models.EmployeeTask
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>EmployeeTask</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Date)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Date)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StartTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StartTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EndTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EndTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TasksDone)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TasksDone)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Employee.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Employee.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Status)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Status)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

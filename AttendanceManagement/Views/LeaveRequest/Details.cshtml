@@ -1,0 +1,64 @@
+﻿@model AttendanceManagement.Models.LeaveRequest
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>LeaveRequest</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateOfApplication)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateOfApplication.Date)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FromDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FromDate.Date)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ToDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ToDate.Date)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.TypeOfLeave)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TypeOfLeave)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Reason)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Reason)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Status)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Status)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Employee.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Employee.Name)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
